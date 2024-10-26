@@ -1,4 +1,5 @@
 <?php
+//register request
 
 namespace App\Http\Requests;
 
