@@ -1,8 +1,11 @@
 <?php
 
+// config/app.php
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\UserRedirection;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,8 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->append(UserRedirection::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        // Exception handling logic
     })->create();
+
