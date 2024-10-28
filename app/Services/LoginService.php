@@ -10,32 +10,36 @@ class LoginService
 {
     public function attemptLogin($credentials)
     {
-        // Determine if the provided credential is an email or a phone
-        $field = filter_var($credentials['email'] ?? $credentials['phone'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+        $identifier = $credentials['email_or_phone'];
         $password = $credentials['password'];
 
-        // Attempt to retrieve the user based on the identified field (email or phone)
-        $user = User::where($field, $credentials[$field])->first();
+        // First, try to find the user by email
+        $user = User::where('email', $identifier)->first();
 
-        // If the user does not exist, return false
+        // If user not found by email, try to find by phone number in doctor_info
+        if (!$user) {
+            $doctorInfo = DoctorInfo::where('phone_no', $identifier)->first();
+            if ($doctorInfo) {
+                $user = User::find($doctorInfo->user_id);
+            }
+        }
+
+        // If no user found with either email or phone
         if (!$user) {
             return false;
         }
 
-        // Retrieve the associated DoctorInfo
+        // Check if user has an active status and is a doctor
         $doctorInfo = DoctorInfo::where('user_id', $user->id)->first();
-
-        // Check if the user is inactive
         if ($doctorInfo && $doctorInfo->active_status !== 'active') {
             return 'inactive';
         }
 
-        // Attempt to log the user in
-        if (Auth::attempt([$field => $credentials[$field], 'password' => $password])) {
+        // Attempt authentication with email only
+        if (Auth::attempt(['email' => $user->email, 'password' => $password])) {
             return true;
         }
 
-        // Return false if the login attempt fails
         return false;
     }
 }

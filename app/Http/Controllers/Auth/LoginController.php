@@ -23,8 +23,8 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        // Attempt login with the service and capture the response
-        $result = $this->loginService->attemptLogin($request->only('email', 'phone', 'password'));
+        // Attempt login through the service
+        $result = $this->loginService->attemptLogin($request->only('email_or_phone', 'password'));
 
         if ($result === true) {
             return redirect()->route('doctor.dashboard');

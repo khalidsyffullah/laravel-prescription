@@ -6,26 +6,32 @@
     <form action="{{ route('login') }}" method="POST">
         @csrf
         <div>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="{{ old('email') }}">
-        </div>
-        <div>
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" value="{{ old('phone') }}">
+            <label for="email_or_phone">Email or Phone:</label>
+            <input type="text" id="email_or_phone" name="email_or_phone" value="{{ old('email_or_phone') }}">
+            @error('email_or_phone')
+                <span class="error">{{ $message }}</span>
+            @enderror
         </div>
         <div>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
+            @error('password')
+                <span class="error">{{ $message }}</span>
+            @enderror
         </div>
         <button type="submit">Login</button>
     </form>
 
-    @if ($errors->any())
-        <div class="error-messages">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
+    @error('inactive')
+        <div class="error-message">
+            {{ $message }}
         </div>
-    @endif
+    @enderror
+
+    @error('login')
+        <div class="error-message">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 @endsection

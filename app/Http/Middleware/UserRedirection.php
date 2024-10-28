@@ -1,5 +1,6 @@
 <?php
 
+
 // app/Http/Middleware/UserRedirection.php
 
 namespace App\Http\Middleware;
@@ -13,12 +14,17 @@ class UserRedirection
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && Auth::user()->user_type_id == 2) {
-            return redirect()->route('doctor.dashboard');
+            // Check if the user is already on the dashboard route
+            if (!$request->routeIs('doctor.dashboard')) {
+                return redirect()->route('doctor.dashboard');
+            }
         }
 
         return $next($request);
