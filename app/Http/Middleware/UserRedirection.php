@@ -20,10 +20,19 @@ class UserRedirection
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->user_type_id == 2) {
-            // Check if the user is already on the dashboard route
-            if (!$request->routeIs('doctor.dashboard')) {
-                return redirect()->route('doctor.dashboard');
+        // if (Auth::check() && Auth::user()->user_type_id == 2) {
+        //     // Check if the user is already on the dashboard route
+        //     if (!$request->routeIs('doctor.dashboard')) {
+        //         return redirect()->route('doctor.dashboard');
+        //     }
+        // }
+
+        if (Auth::check()) {
+            if (Auth::user()->user_type_id == 2) {
+                // If the user is trying to access login/register pages, redirect to dashboard
+                if ($request->routeIs('login') || $request->routeIs('register.form')) {
+                    return redirect()->route('doctor.dashboard');
+                }
             }
         }
 
