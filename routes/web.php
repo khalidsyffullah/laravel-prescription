@@ -9,6 +9,7 @@ use App\Http\Controllers\prescriptions\DiagonosisController;
 use App\Http\Controllers\prescriptions\PrescriptionController;
 use App\Http\Controllers\users\DashboardController;
 use App\Http\Middleware\UserRedirection;
+use App\Http\Controllers\prescriptions\Advice_investigationsController;
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register.form');
 Route::post('register', [RegisterController::class, 'register'])->name('register');
@@ -39,4 +40,6 @@ Route::middleware(['auth', UserRedirection::class])->group(function () {
 
     route::post('/prescription/save-session', [PrescriptionController::class, 'saveSession'])->name('prescription.saveSession');
     Route::get('/prescription/preview', [PrescriptionController::class, 'preview'])->name('prescription.preview');
+    Route::get('advice_investigation',[Advice_investigationsController::class, 'index'])->name('prescription.adviceInvestigation');
+    Route::post('/advice_investigation', [Advice_investigationsController::class,'store'])->name('advice_investigation.store');
 });
