@@ -1,28 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('advice_investigation.store') }}" method="POST">
-        @csrf
-        <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-        </div>
-        <div>
-            @error('name')
-                <div>{{ $message }}</div>
-            @enderror
+    <div class="container mx-auto mt-8">
+        <h1 class="text-2xl font-bold mb-6">Advice Investigations</h1>
 
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <textarea name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
-        </div>
+        <form action="{{ route('advice_investigation.store') }}" method="POST">
+            @csrf
+            <div class="max-w-md mx-auto">
+                <x-prescriptions.form-field
+                    name="name"
+                    label="Name"
+                    required
+                    placeholder="Enter name"
+                />
 
-        @error('descriptions')
-            <div>
-                {{ $message }}
+                <x-prescriptions.form-field
+                    name="description"
+                    label="Description"
+                    type="textarea"
+                    placeholder="Enter description"
+                />
+
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        Submit Now
+                    </button>
+                </div>
             </div>
-        @enderror
-        <button type="submit">Submit now</button>
-    </form>
+        </form>
+    </div>
 @endsection

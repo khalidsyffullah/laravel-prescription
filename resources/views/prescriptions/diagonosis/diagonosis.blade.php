@@ -1,27 +1,32 @@
-<!-- resources/views/prescriptions/diagonosis/diagonosis.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Diagonosis</h1>
-    <form action="{{ route('diagonosis.store') }}" method="POST">
-        @csrf
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-            @error('name')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
+    <div class="container mx-auto mt-8">
+        <h1 class="text-2xl font-bold mb-6">Create Diagnosis</h1>
 
-        <div>
-            <label for="descriptions">Description:</label>
-            <textarea name="descriptions" id="descriptions">{{ old('descriptions') }}</textarea>
-            @error('descriptions')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
+        <form action="{{ route('diagonosis.store') }}" method="POST">
+            @csrf
+            <div class="max-w-md mx-auto">
+                <x-prescriptions.form-field
+                    name="name"
+                    label="Name"
+                    required
+                    placeholder="Enter name"
+                />
 
-        <button type="submit">Submit</button>
-    </form>
+                <x-prescriptions.form-field
+                    name="descriptions"
+                    label="Description"
+                    type="textarea"
+                    placeholder="Enter description"
+                />
+
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
