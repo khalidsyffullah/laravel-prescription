@@ -5,6 +5,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\prescriptions\additional_adviceController;
 use App\Http\Controllers\prescriptions\DiagonosisController;
 use App\Http\Controllers\prescriptions\PrescriptionController;
 use App\Http\Controllers\users\DashboardController;
@@ -40,6 +41,8 @@ Route::middleware(['auth', UserRedirection::class])->group(function () {
 
     route::post('/prescription/save-session', [PrescriptionController::class, 'saveSession'])->name('prescription.saveSession');
     Route::get('/prescription/preview', [PrescriptionController::class, 'preview'])->name('prescription.preview');
-    Route::get('advice_investigation',[Advice_investigationsController::class, 'index'])->name('prescription.adviceInvestigation');
-    Route::post('/advice_investigation', [Advice_investigationsController::class,'store'])->name('advice_investigation.store');
+    Route::get('advice-investigation',[Advice_investigationsController::class, 'index'])->name('prescription.adviceInvestigation');
+    Route::post('/advice-investigation', [Advice_investigationsController::class,'store'])->name('advice_investigation.store');
+    Route::get('/additional-advices', [additional_adviceController::class, 'index'])->name('additional_advice.index');
+    Route:: POST('/additional-advices',[additional_adviceController::class, 'store'])->name('additional_advice.store');
 });
