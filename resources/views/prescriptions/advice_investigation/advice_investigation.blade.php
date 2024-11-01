@@ -7,19 +7,10 @@
         <form action="{{ route('advice_investigation.store') }}" method="POST">
             @csrf
             <div class="max-w-md mx-auto">
-                <x-prescriptions.form-field
-                    name="name"
-                    label="Name"
-                    required
-                    placeholder="Enter name"
-                />
+                <x-prescriptions.form-field name="name" label="Name" required placeholder="Enter name" />
 
-                <x-prescriptions.form-field
-                    name="description"
-                    label="Description"
-                    type="textarea"
-                    placeholder="Enter description"
-                />
+                <x-prescriptions.form-field name="description" label="Description" type="textarea"
+                    placeholder="Enter description" />
 
                 <div class="text-center">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
