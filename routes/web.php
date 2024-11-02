@@ -11,6 +11,7 @@ use App\Http\Controllers\prescriptions\PrescriptionController;
 use App\Http\Controllers\users\DashboardController;
 use App\Http\Middleware\UserRedirection;
 use App\Http\Controllers\prescriptions\Advice_investigationsController;
+use App\Http\Controllers\prescriptions\Advice_testsController;
 use App\Http\Controllers\prescriptions\DrugController;
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register.form');
@@ -48,4 +49,7 @@ Route::middleware(['auth', UserRedirection::class])->group(function () {
     Route:: POST('/additional-advices',[additional_adviceController::class, 'store'])->name('additional_advice.store');
     Route::get('/drugs',[DrugController::class, 'index'])->name('drug.view');
     Route::POST('/drugs',[DrugController::class, 'store'])->name('drugs.store');
+    Route::get('/adviced-tests', [Advice_testsController::class,'index'] ) ->name('tests');
+    Route::POST('/adviced-tests',[Advice_testsController::class, 'store'])->name('tests.store');
+
 });
