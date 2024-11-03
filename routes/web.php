@@ -5,6 +5,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\patientDetailsController;
 use App\Http\Controllers\prescriptions\additional_adviceController;
 use App\Http\Controllers\prescriptions\DiagonosisController;
 use App\Http\Controllers\prescriptions\PrescriptionController;
@@ -51,5 +52,9 @@ Route::middleware(['auth', UserRedirection::class])->group(function () {
     Route::POST('/drugs',[DrugController::class, 'store'])->name('drugs.store');
     Route::get('/adviced-tests', [Advice_testsController::class,'index'] ) ->name('tests');
     Route::POST('/adviced-tests',[Advice_testsController::class, 'store'])->name('tests.store');
+    Route::get('/patients', [patientDetailsController::class, 'index'])->name('patients');
+    Route::post('/patients', [patientDetailsController::class, 'store'])->name('patient.store');
+    Route::post('/check-patient', [patientDetailsController::class, 'checkPatient'])->name('check.patient');
+    Route::post('/patient/update', [patientDetailsController::class, 'update'])->name('patient.update');
 
 });
