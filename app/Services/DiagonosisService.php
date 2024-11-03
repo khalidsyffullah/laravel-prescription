@@ -14,7 +14,7 @@ class DiagonosisService
         return Diagonosis::create($data);
     }
 
-    public function searchDiagonosis(string $keyword)
+    public function search(string $keyword)
     {
         return Diagonosis::where('user_id', Auth::id())
             ->where('name', 'LIKE', "%{$keyword}%")

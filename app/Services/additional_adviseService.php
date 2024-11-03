@@ -12,4 +12,17 @@ class additional_adviseService{
 
     }
 
+    public function search(string $keyword){
+
+        return Aditional_advises::where('user_id', Auth::id())
+        ->where('name','LIKE',"%{$keyword}%")
+        ->get();
+    }
+
+    public function findAdditionalAdviceServiceByName(string $name){
+        return Aditional_advises::where('user_id', Auth::id())
+        ->where('name', "%{$name}%")
+        ->first();
+    }
+
 }

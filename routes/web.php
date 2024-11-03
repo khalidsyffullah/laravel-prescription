@@ -38,9 +38,8 @@ Route::middleware(['auth', UserRedirection::class])->group(function () {
     Route::get('/diagonosis', [DiagonosisController::class, 'index'])->name('diagonosis.index');
     Route::post('/diagonosis', [DiagonosisController::class, 'store'])->name('diagonosis.store');
     Route::get('/prescriptions', [PrescriptionController::class, 'index'])->name('prescription.index');
-    Route::get('/prescriptions', [PrescriptionController::class, 'index'])->name('prescription.index');
-    Route::get('/prescriptions/search', [PrescriptionController::class, 'search'])->name('prescription.search'); // New search route
-    Route::post('/prescriptions', [PrescriptionController::class, 'store'])->name('prescription.store'); // New store route for creating a new diagnosis
+    Route::get('/prescriptions/search-diagonosis', [PrescriptionController::class, 'searchDiagonosis'])->name('prescription.searchDiagonosis');
+    Route::get('/prescriptions/search-additional-advice', [PrescriptionController::class, 'searchAdditionalAdvice'])->name('prescription.searchAdditionalAdvice');
 
     route::post('/prescription/save-session', [PrescriptionController::class, 'saveSession'])->name('prescription.saveSession');
     Route::get('/prescription/preview', [PrescriptionController::class, 'preview'])->name('prescription.preview');
