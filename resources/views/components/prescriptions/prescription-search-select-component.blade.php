@@ -80,6 +80,7 @@
 
         $('#{{ $searchInputId }}').on('keypress', function(e) {
             if (e.which == 13) {
+                debugger
                 e.preventDefault();
                 const name = $(this).val().trim();
                 const existsInSelected = $('#' + '{{ $selectedListId }} div').toArray()

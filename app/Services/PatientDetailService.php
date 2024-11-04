@@ -46,4 +46,17 @@ class PatientDetailService {
             throw $e;
         }
     }
+
+    public function search(string $keyword){
+        return Patient_details::where('user_id', Auth::id())
+        ->where('name', 'LIKE', "%{$keyword}%")
+        ->get();
+
+    }
+    public function findPatientByName(string $name){
+        return Patient_details::where('user_id', Auth::id())
+        ->where('name', "%{$name}%")
+        ->first();
+
+    }
 }

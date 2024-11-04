@@ -23,11 +23,11 @@ class patientDetailsRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'nullable|email|max:255',
             'phone_no' => 'nullable|integer',
             'age' => 'nullable|string|max:255',
             'weight' => 'nullable|numeric',
-            'gender' => 'required|in:male,female',
+            'gender' => 'nullable|in:male,female',
         ];
     }
 }

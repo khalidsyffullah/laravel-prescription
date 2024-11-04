@@ -29,4 +29,15 @@ class DrugService
             ], 500);
         }
     }
+    public function search(string $keyword){
+        return Drug::where('user_id', Auth::id())
+        ->where('name', 'LIKE', "%{$keyword}%")
+        ->get();
+    }
+    public function findDrugByName(string $name){
+        return Drug::where('user_id', Auth::id())
+        ->where('name', "%{$name}%")
+        ->first();
+
+    }
 }

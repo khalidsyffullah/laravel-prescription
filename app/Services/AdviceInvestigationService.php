@@ -14,4 +14,15 @@ class AdviceInvestigationService
         return Advise_investigation::create($data);
 
     }
+    public function search(string $keyword){
+        return Advise_investigation::where('user_id', Auth::id())
+        ->where('name','LIKE', "%{$keyword}%")
+        ->get();
+    }
+    public function findAdviceInvestigationByName(string $name){
+
+        return Advise_investigation::where('user_id', Auth::id())
+        ->where('name', "%{$name}%")
+        ->first();
+    }
 }

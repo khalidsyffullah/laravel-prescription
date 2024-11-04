@@ -23,8 +23,8 @@ class DrugRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'generic_name' => 'required|string|max:255',
-            'brand_name' => 'required|string|max:255'
+            'generic_name' => 'nullable|string|max:255',
+            'brand_name' => 'nullable|string|max:255'
         ];
     }
 }

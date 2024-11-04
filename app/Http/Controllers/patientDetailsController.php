@@ -94,14 +94,26 @@ class patientDetailsController extends Controller
         }
     }
 
-    public function store(patientDetailsRequest $request){
-        try {
-            $data = $request->validated();
-            $patientDetail = $this->patientDetails->createNewPatient($data);
+    public function store(patientDetailsRequest $request)
+{
+    try {
+        // Retrieve the validated data
+        $data = $request->validated();
 
-            return redirect()->back()->with('success', 'Patient created successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error creating patient: ' . $e->getMessage())->withInput();
-        }
+        // Set default values if fields are empty
+        $data['email'] = $data['email'] ?? 'demo@email.com';
+        $data['gender'] = $data['gender'] ?? 'male';
+        $data['phone_no'] = $data['phone_no'] ?? '123456';
+        $data['age'] = 30;
+        $data['weight'] = 20;
+
+        // Create a new patient detail entry
+        $patientDetail = $this->patientDetails->createNewPatient($data);
+
+        return redirect()->back()->with('success', 'Patient created successfully');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Error creating patient: ' . $e->getMessage())->withInput();
     }
+}
+
 }

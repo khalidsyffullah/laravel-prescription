@@ -41,6 +41,11 @@ Route::middleware(['auth', UserRedirection::class])->group(function () {
     Route::get('/prescriptions/search-diagonosis', [PrescriptionController::class, 'searchDiagonosis'])->name('prescription.searchDiagonosis');
     Route::get('/prescriptions/search-additional-advice', [PrescriptionController::class, 'searchAdditionalAdvice'])->name('prescription.searchAdditionalAdvice');
 
+    Route::get('/prescriptions/search-advice-investigation', [PrescriptionController::class, 'searchAdviceInvestigation'])->name('prescription.searchAdviceInvestigation');
+    Route::get('/prescriptions/search-advice-test', [PrescriptionController::class, 'searchadviceTest'])->name('prescription.searchadviceTest');
+    Route::get('/prescriptions/search-drugs', [PrescriptionController::class, 'searchdrug'])->name('prescription.searchdrug');
+    Route::get('/prescriptions/search-patients', [PrescriptionController::class, 'searchpatientDetail'])->name('prescription.searchpatientDetail');
+
     route::post('/prescription/save-session', [PrescriptionController::class, 'saveSession'])->name('prescription.saveSession');
     Route::get('/prescription/preview', [PrescriptionController::class, 'preview'])->name('prescription.preview');
     Route::get('advice-investigation',[Advice_investigationsController::class, 'index'])->name('prescription.adviceInvestigation');
