@@ -22,6 +22,7 @@ class DrugRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'nullable|integer',
             'name' => 'required|string|max:255',
             'generic_name' => 'nullable|string|max:255',
             'brand_name' => 'nullable|string|max:255'

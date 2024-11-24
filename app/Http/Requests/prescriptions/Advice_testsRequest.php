@@ -22,6 +22,7 @@ class Advice_testsRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'nullable|integer',
             'name' => 'required | string | max:255',
             'details' => 'nullable | string'
         ];

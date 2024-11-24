@@ -1,9 +1,15 @@
 <?php
+// app/Http/Controllers/testController.php
 
-namespace App\Http\Controllers\prescriptions;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\advice_investigationRequest;
+use App\Http\Requests\prescriptions\additional_addviceRequest;
+use App\Http\Requests\prescriptions\Advice_testsRequest;
+use App\Http\Requests\prescriptions\DiagonosisRequest;
+use App\Http\Requests\prescriptions\DrugRequest;
 use Illuminate\Http\Request;
+use App\Models\prescriptions\Diagonosis;
 use App\Services\additional_adviseService;
 use App\Services\Advice_testService;
 use App\Services\AdviceInvestigationService;
@@ -11,8 +17,7 @@ use Illuminate\Support\Facades\Session;
 use App\Services\DiagonosisService;
 use App\Services\DrugService;
 
-
-class PrescriptionController extends Controller
+class testController extends Controller
 {
     protected $additionalAdviceService;
     protected $adviceTestService;
@@ -43,9 +48,17 @@ class PrescriptionController extends Controller
         $selectedAdviceInvestigations = Session::get('selectedAdviceInvestigations', []);
         $selectedDiagnoses = Session::get('selectedDiagnoses', []);
         $selectedDrugs = Session::get('selectedDrugs', []);
+
+
         // Pass selected diagnoses to the view
-        return view('prescriptions.prescriptions', compact('selectedAdditionalAdvices', 'selectedAdviceTests', 'selectedAdviceInvestigations', 'selectedDiagnoses', 'selectedDrugs'));
+        return view('welcome', compact( 'selectedAdditionalAdvices', 'selectedAdviceTests','selectedAdviceInvestigations','selectedDiagnoses', 'selectedDrugs'));
+
+
+        // return Session::get(key: 'selectedDiagnoses');
+        // return Session::all();
     }
+
+
 
     private function itemSearch($itemService, $keyword, $searchItemKey)
     {
@@ -118,4 +131,7 @@ class PrescriptionController extends Controller
         $data = ['name' => $request->input('name')];
         return $this->itemStore($this->drugService, 'createDrug', $data, 'drug');
     }
+
+
+
 }
